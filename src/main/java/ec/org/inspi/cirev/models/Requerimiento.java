@@ -94,6 +94,8 @@ public class Requerimiento {
 	private Calendar shippingDate;
 	@Column(name = "reception_date")
 	private Calendar receptionDate;
+	@Column(name = "rejected_sample_detail")
+	private String rejected_sample_detail;
 	
 	@Column(name = "created_at")
 	private Calendar createdAt;

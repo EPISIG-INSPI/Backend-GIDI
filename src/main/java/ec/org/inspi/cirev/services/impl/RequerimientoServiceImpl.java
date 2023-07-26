@@ -196,6 +196,7 @@ public class RequerimientoServiceImpl implements RequerimientoService {
 				requerimiento.setModifiedBy(requerimientoRequest.getReceptionUserId());
 				requerimiento.setModifiedAt(fechaActual);
 			} else {
+				String year = String.valueOf(fechaActual.get(Calendar.YEAR));
 				Requerimiento reqId = requeRepo.findFirstByOrderByIdDesc();
 				if (reqId != null)
 					requerimiento.setId(reqId.getId() + 1);
@@ -205,10 +206,10 @@ public class RequerimientoServiceImpl implements RequerimientoService {
 				if (number != null) {
 					requerimiento.setNumber(number.getNumber() + 1);
 					requerimiento.setCode(
-							"LAM-" + fechaActual.get(Calendar.YEAR) + "-" + String.format("%03d", (reqId.getId() + 1)));
+							"LAM-" + year.substring(2,4) + "-" + String.format("%03d", (reqId.getId() + 1)));
 				} else {
 					requerimiento.setNumber(1);
-					requerimiento.setCode("LAM-" + fechaActual.get(Calendar.YEAR) + "-001");
+					requerimiento.setCode("LAM-" + year.substring(2,4) + "-001");
 				}
 				RequerimientoEstado reqEstado = reqEstaRep.findFirstByOrderByIdDesc();
 				reqEstado = reqEstaRep.save(new RequerimientoEstado((reqEstado.getId() + 1), requerimiento.getId(), 1 ));
